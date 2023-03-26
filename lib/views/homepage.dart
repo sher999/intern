@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _loading = true;
-    // TODO: implement initState
+    
     super.initState();
 
     categories = getCategories();
@@ -40,7 +40,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(),
-      body: SafeArea(
+      body:_loading
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : SafeArea(
         child: SingleChildScrollView(
             child: Container(
           child: Column(

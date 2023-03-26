@@ -13,8 +13,6 @@ class News {
   Future<void> getNews() async {
     final newsa = Hive.box(API_BOX).get('news', defaultValue: []);
     if (newsa.isNotEmpty) {
-      print('hive');
-      print(newsa);
       if (newsa['status'] == "ok") {
         newsa["articles"].forEach((element) {
           if (element['urlToImage'] != null && element['description'] != null) {
@@ -43,21 +41,6 @@ class News {
       Hive.box(API_BOX).put('news', jsonData);
 
       if (jsonData['status'] == "ok") {
-        jsonData["articles"].forEach((element) {
-          if (element['urlToImage'] != null && element['description'] != null) {
-            Article article = Article(
-              title: element['title'],
-              author: element['author'],
-              description: element['description'],
-              urlToImage: element['urlToImage'],
-              publshedAt: DateTime.parse(element['publishedAt']),
-              content: element["content"],
-              articleUrl: element["url"],
-            );
-            news.add(article);
-          }
-        });
-      } else {
         jsonData["articles"].forEach((element) {
           if (element['urlToImage'] != null && element['description'] != null) {
             Article article = Article(
